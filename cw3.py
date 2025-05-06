@@ -8,12 +8,17 @@ class RandomGraphGenerator:
     def generate_edges(n, l):
         graph = nx.Graph()
         graph.add_nodes_from(range(n))
-        edges = set()
-        while len(edges) < l:
-            u, v = random.sample(range(n), 2)
-            if u != v and (u, v) not in edges and (v, u) not in edges:
-                edges.add((u, v))
-        graph.add_edges_from(edges)
+
+        # wszystkie możliwe unikalne krawędzie
+        all_possible_edges = []
+        for u in range(n):
+            for v in range(u + 1, n):
+                all_possible_edges.append((u, v))
+
+        # losowy wybór l krawędzi bez powtórzeń
+        chosen_edges = random.sample(all_possible_edges, l)
+
+        graph.add_edges_from(chosen_edges)
         return graph
 
     @staticmethod

@@ -58,7 +58,7 @@ class Graph:
         return incidence_matrix.tolist()
 
     def to_adjacency_list(self):
-        return {node: list(neighbors) for node, neighbors in self.graph.adjacency()}
+        return {node: list(self.graph.neighbors(node)) for node in self.graph.nodes}
 
 
 if __name__ == "__main__":
